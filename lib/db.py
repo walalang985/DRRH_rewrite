@@ -1,7 +1,16 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Apr  7 09:09:35 2021
+import pymysql as psql
 
-@author: Admin
-"""
+DBNAME = "DisasterResilienceRatingforHotels"
+def __connect__():
+    return psql.connect(host='localhost',user='root',password='',database=DBNAME)
+class Table():
+    user = "userInfo"
+    key = "userKeys"
+class Database:
+    def __init__():
+        return
+    class userInfo:
+        def __init__():
+            return
+        
 
