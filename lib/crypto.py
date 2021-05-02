@@ -14,14 +14,16 @@ class UnknownCipherMethodError(Exception):
         super().__init__(msg)
 
 class cipher:
-    type = None
     class CipherMode:
         enc = "ENC"
+        dec = "DEC"
+        def __init__(self):
+            return self
     class CipherType:
         rsa = "RSA"
         fernet = "FERNET"
         def __init__(self):
-            return
+            return self
     class KeyLoad(object):        
         type = None
         def __init__(self,type=CipherType.fernet or CipherType.rsa):
@@ -34,7 +36,7 @@ class cipher:
                 return Fernet(key)
     class KeyGen(object):
         type = None
-        def __init__(self,type = None):
+        def __init__(self,type = CipherType.fernet or CipherType.rsa):
             if type != CipherType.fernet or CipherType.rsa:
                 raise ValueError
             else:
@@ -61,14 +63,17 @@ class cipher:
                 pass
 
             return
-    def __init__(self, type = CipherType.fernet or CipherType.rsa or None, key = None):
+    def __init__(self, type = CipherType.fernet or CipherType.rsa or None, key = None,mode = CipherMode.enc or CipherMode.dec or None):
         self.type = type
+        self.key = key
+        self.mode = mode
         return
-    def exec(self,msg,key = None):
-        if key == None:
+    def exec(self,msg):
+        if self.key == None:
             return hashlib.sha512(hashlib.sha3_512(msg.encode()).hexdigest()).hexdigest()
         else:
-            if self.KeyCheck(key).keyType == "RSA":
-                
+            if self.KeyCheck(self.key).keyType == "RSA":
+                if self == self:
+                    return
 
 
